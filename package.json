@@ -16,6 +16,7 @@
     "@hookform/resolvers": "^3.3.2",
     "@radix-ui/themes": "^2.0.0",
     "@reduxjs/toolkit": "^1.9.7",
+    "@vitejs/plugin-react-swc": "^3.7.0",
     "axios": "^1.6.0",
     "delay": "^6.0.0",
     "json-server": "^0.17.4",
