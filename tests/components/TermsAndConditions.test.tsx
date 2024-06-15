@@ -12,33 +12,32 @@ afterEach(() => {
 });
 
 describe("TermsAndConditions", () => {
-  it("올바른 text와 초기 상태를 렌더링한다.", () => {
+  const renderComponent = () => {
     render(<TermsAndConditions />);
 
-    const heading = screen.getByRole("heading");
-    expect(heading).toBeInTheDocument();
+    return {
+      heading: screen.getByRole("heading"),
+      checkbox: screen.getByRole("checkbox"),
+      button: screen.getByRole("button"),
+    };
+  };
+  it("올바른 text와 초기 상태를 렌더링한다.", () => {
+    const { heading, checkbox, button } = renderComponent();
+
     expect(heading).toHaveTextContent("Terms & Conditions");
 
-    const checkbox = screen.getByRole("checkbox");
-    expect(checkbox).toBeInTheDocument();
     expect(checkbox).not.toBeChecked();
 
-    const button = screen.getByRole("button");
-    expect(button).toBeInTheDocument();
     expect(button).toHaveTextContent(/Submit/i);
     expect(button).toBeDisabled();
   });
 
   it("체크박스가 체크되었을 때 버튼이 활성화된다.", async () => {
-    // Arrange
-    render(<TermsAndConditions />);
+    const { checkbox, button } = renderComponent();
 
-    // Act
-    const checkbox = screen.getByRole("checkbox");
     const user = userEvent.setup();
     await user.click(checkbox);
 
-    // Assert
-    expect(screen.getByRole("button")).toBeEnabled();
+    expect(button).toBeEnabled();
   });
 });
